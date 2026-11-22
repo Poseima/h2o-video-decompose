@@ -87,7 +87,7 @@ ffmpeg -framerate 30 -start_number 630 -i "annotated/%09d.png" \
 
 先识别活动项附着于画幅、静态页面还是独立平面。以页框、固定文字或地线等非活动结构估算该局部的整体运动，避开参与动效的区域，用另一个固定锚点检查逆投影。输出坐标与测量尺寸的换算见[坐标与回退](#坐标与回退)。
 
-| 实测案例 | 按层记录 | 复刻对照 |
+| 动效示例 | 按层记录 | 复刻对照 |
 | --- | --- | --- |
 | 橙线画完后灰线抬升 | 在同一图表坐标量橙线端点，另量灰线峰顶与两侧轮廓。在笔触交叠处取仍可辨的轮廓点，记录显露或淡化区间。 | 核对橙线画完、灰线开始变形、轮廓趋稳的先后，检查峰顶与肩部是否随时间一起变化。 |
 | 任务标飞向接收卡 | 分别量任务标中心、尾迹端点、接收卡边缘、外齿轮角度和内指针角度，记录状态文字首次可辨时刻。重复齿形的转角用邻帧连续性复核。 | 核对蓄力、飞出、尾迹出现、卡片轻弹和两部件反向旋转的相对时差。 |
@@ -252,8 +252,6 @@ ffmpeg -framerate 30 -start_number 630 -i "annotated/%09d.png" \
 
 8. 总负责人从总工程入口重开并导出，核对依赖、资产版本、声画同步、运动和真实切点。每个有对照原片的范围都要对实际整合成片运行 `continuity` 并逐项回看候选，局部返修须覆盖两端接缝。整片结论取自本次最终导出；分段通过但接缝异常时，整片按报告保留未通过状态。摘要写明通过、需返修、待复核各有多少段。缺少本段对比证据时保留待复核。另列交付版本、整片结论、可见差异和接缝时间码，再链接单项、分段与整片报告。见[镜头连续性验收](continuity.md)。
 
-见[猫学长前十秒案例](cat-opening-reconstruction.md)，其中区分了已经测到的数据和仍需补的观测。
-
 ## 三维场景与 Blender 逆向精测
 
 ### 1. 2D/2.5D 平面动效与 3D Blender 场景的自动判别分流
@@ -290,7 +288,7 @@ ffmpeg -framerate 30 -start_number 630 -i "annotated/%09d.png" \
 ### 3. 3D 物件拆解清单与多位子代理建模分工（`--objects-plan` 与 `assets_bom`）
 
 1. **自动发现模式（不传 `--objects-plan`）**：`decompose.py scene3d` 综合边缘/色差显著主体聚类（适配无发光的写实产品、白日外景或三渲二主体）、高饱和自发光连通域、全画幅光流背景单应性残差聚类（自动分离独立运动物体与静态结构）及环境/底面结构检测，生成候选 3D 物件标注图 `objects_3d_map.png`、单物件裁剪图 `objects/obj_XX.png` 与 `assets_bom.md`。通用标准分类为 `HERO_SUBJECT`、`EMISSIVE_OR_ACCENT`、`DYNAMIC_OBJECT`、`ENVIRONMENT_STRUCTURE`、`GROUND_OR_BACKDROP`、`INSTANCE_OR_SCATTER_GROUP`（同时兼容自定义类别名）。
-2. **语义精测与分工模式（传入 `--objects-plan objects.json`）**：总负责人对照 `objects_3d_map.png` 命名画面中所有需还原的具体 3D 物件后，传入 `--objects-plan` 一键产出精确到米的三维建模施工单（以下示例摘自港风街景案例，其他产品/室内/动画场景按实际物件填写）：
+2. **语义精测与分工模式（传入 `--objects-plan objects.json`）**：总负责人对照 `objects_3d_map.png` 命名画面中所有需还原的具体 3D 物件后，传入 `--objects-plan` 一键产出精确到米的三维建模施工单（以下示例摘自三维街景模板，其他产品/室内/动画场景按实际物件填写）：
 
 ~~~json
 {
@@ -310,8 +308,6 @@ ffmpeg -framerate 30 -start_number 630 -i "annotated/%09d.png" \
 }
 ~~~
 
-见[港风霓虹三维逆向复刻案例](hk-neon-3d-reconstruction.md)，其中完整展示了从视频帧定量反解全场景 11 类 3D 物件建模 BOM 清单、三维相机、分层空心灯管遮罩、各向异性体积雾与合成器黑柔镜参数并接入 Blender 5.2 的过程。
-
 ### 4. 高精写实静态场景 3DGS 本地重建与 Blender 5.2 渲染（`gs3d_pipeline.py`）
 
 当场景属于**高精写实有机曲面 / 3A 级密集静态纹理**且用户目标为**视频新视角自由运镜**（已前置同意 `CAP-3D-PHOTOREAL-3DGS` 视角锥与重打光边界）时，可使用 `scripts/gs3d_pipeline.py` 依次完成抽帧、COLMAP 4.2 以上的稀疏重建和 Brush 训练，再将 PLY 导入 Blender。安装与平台验证见[可选 3DGS](../INSTALL.md#可选-3dgs)。
@@ -324,7 +320,7 @@ python scripts/gs3d_pipeline.py \
   --crop-bottom 0.068 --steps 20000 --max-splats 500000 --stage all
 ~~~
 
-关键操作门槛与避坑规范（经 [石牌坊 3DGS 基准](pavilion-3dgs-benchmark.md) 实测验证）：
+关键操作门槛与避坑规范：
 1. **严格预筛刚体静光段**：抽帧前必须切掉液化/鱼眼转场、第一人称手臂/脚步等动态前景以及光照突变段；画面边缘存在画幅锁定水印时用 `--crop-bottom` / `--crop-top` 裁除，防止练出镜头前漂浮灰斑。
 2. **用 COLMAP 平移基线预判安全自由运镜角**：`--stage colmap`（或 `--stage baseline`）会自动计算 `lateral_to_depth_ratio` 与 `dolly_to_depth_ratio`：
    - **大范围平移/环拍段（`lateral_to_depth_ratio >= 0.45`）**：支持 `±25°~45°` 较宽自由环绕；
@@ -376,7 +372,7 @@ python scripts/soundtrack.py beat-lock /path/to/source.mp4 /path/to/beat-lock \
 
 顺着每段画面逐个确认音效、音乐事件和画面配合。局部动作可用起动、接触、显露、峰值或结束帧，长声可按区间说明它跨了哪些镜头。每条对应保留支持证据与可见限制。只找到音效或只找到动作的条目可留空另一侧。短点过弱、不同轨同时存在或可能只是音乐时，降低置信度并说明疑点。
 
-把审核后的结果保存为 `review.json`。每项使用一个源帧和一项采用的声音时间。同一画面在音乐轨和音效轨均有事件时写两行。 `anchor` 选择 `onset`、`peak`、`end`、`beat` 或 `boundary`。可记录区间，两端分别填入 `onset_s` 和 `end_s`。置信度用 `high`、`medium`、`low`、`unmatched`。具体字段如下，键击示例来自猫学长开头。
+把审核后的结果保存为 `review.json`。每项使用一个源帧和一项采用的声音时间。同一画面在音乐轨和音效轨均有事件时写两行。 `anchor` 选择 `onset`、`peak`、`end`、`beat` 或 `boundary`。可记录区间，两端分别填入 `onset_s` 和 `end_s`。置信度用 `high`、`medium`、`low`、`unmatched`。具体字段如下示例：
 
 ~~~json
 {

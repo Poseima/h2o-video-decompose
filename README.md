@@ -147,14 +147,6 @@ npx skills add Poseima/h2o-video-decompose --skill h2o-video-decompose-distribut
 
 ---
 
-## 实测案例
-
-- **白页打字与连续推拉（2D / 2.5D）**：从快切和页面更新中拆出打字、误选、分区清晰度与快推拖影 → [猫学长前十秒案例](h2o-video-decompose-distribution/references/cat-opening-reconstruction.md)
-- **港风街景与霓虹灯牌（3D Blender）**：反解三维相机深度比、三层空心灯管高度遮罩、各向异性体积雾与合成器光学链路 → [港风三维案例](h2o-video-decompose-distribution/references/hk-neon-3d-reconstruction.md)
-- **石牌坊静态场景（3DGS）**：Apple Silicon 本地 COLMAP + Brush + Blender 5.2 实测与视角锥边界分析 → [3DGS 基准](h2o-video-decompose-distribution/references/pavilion-3dgs-benchmark.md)
-
----
-
 ## 仓库结构与文档
 
 ```text

@@ -98,7 +98,7 @@ python scripts/soundtrack.py prepare "work/smoke.mp4" "work/audio" --scan "work/
 
 1. 保留基础环境。装 COLMAP 4.2 或兼容版本，确认 `colmap` 可以从 `PATH` 调用。macOS 可用 `brew install colmap`。Windows 使用官方构建并把原生 `colmap.exe` 所在目录加入 `PATH`。其他安装方式见[COLMAP 官方手册](https://colmap.github.io/install.html)。
 2. 下载与系统和架构匹配的 Brush CLI，解压到自选目录。macOS 如无执行权限，对解压的 `brush_app` 执行 `chmod +x`。脚本先用 `--brush`，其次用 `H2O_BRUSH_BIN`，最后从 `PATH` 查找 `brush_app` 或 `brush`。项目基准使用 v0.3.0。 [Brush v0.3.0 官方发行包](https://github.com/ArthurBrussee/brush/releases/tag/v0.3.0)
-3. 只在需要编辑或渲染时安装 Blender 和与其版本匹配的 KIRI 3DGS Render 扩展。用 Blender 的首选项从磁盘安装扩展 ZIP，启用后导入 `splat/scene_final.ply`。渲染前先用一帧试渲染确认扩展与 GPU 可用。Apple Silicon / Metal 基准见[3DGS 实测](references/pavilion-3dgs-benchmark.md)。 [Blender 下载](https://www.blender.org/download/) · [KIRI 扩展发行包](https://github.com/Kiri-Innovation/3dgs-render-blender-addon/releases)
+3. 只在需要编辑或渲染时安装 Blender 和与其版本匹配的 KIRI 3DGS Render 扩展。用 Blender 的首选项从磁盘安装扩展 ZIP，启用后导入 `splat/scene_final.ply`。渲染前先用一帧试渲染确认扩展与 GPU 可用。Apple Silicon / Metal 渲染步骤见[使用手册 3DGS 小节](references/workflow.md#4-高精写实静态场景-3dgs-本地重建与-blender-52-渲染gs3d_pipelinepy)。 [Blender 下载](https://www.blender.org/download/) · [KIRI 扩展发行包](https://github.com/Kiri-Innovation/3dgs-render-blender-addon/releases)
 
 ### 验证
 

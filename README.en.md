@@ -147,14 +147,6 @@ All scripts live under `h2o-video-decompose-distribution/scripts/` and can be in
 
 ---
 
-## Case Studies
-
-- **White-Page Typing & Continuous Push/Pull (2D / 2.5D)** → [cat-opening-reconstruction.md](h2o-video-decompose-distribution/references/cat-opening-reconstruction.md)
-- **Hong Kong Neon Street & Signboard (3D Blender)** → [hk-neon-3d-reconstruction.md](h2o-video-decompose-distribution/references/hk-neon-3d-reconstruction.md)
-- **Stone Pavilion Static Scene (Apple Silicon 3DGS)** → [pavilion-3dgs-benchmark.md](h2o-video-decompose-distribution/references/pavilion-3dgs-benchmark.md)
-
----
-
 ## Repository Layout & Documentation
 
 ```text
