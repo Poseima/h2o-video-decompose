@@ -1,0 +1,3 @@
+soundfile
+beat-this==1.1.0
+eluate @ git+https://github.com/anaxoniclabs/ELUATE.git@1b40cd9deae8fb0831b2550d6d54a517aba8731d

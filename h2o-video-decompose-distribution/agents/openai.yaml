@@ -1,0 +1,4 @@
+interface:
+  display_name: "分发版"
+  short_description: "通用的视频拆解与逐帧验收，按需安装音频分轨和三维重建工具。"
+  default_prompt: "使用 $h2o-video-decompose-distribution 拆解我提供的视频。"
